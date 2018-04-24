@@ -2,11 +2,16 @@ package com.songkhoon.singaporepsi;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.SupportMapFragment;
 import com.songkhoon.singaporepsi.contoller.GoogleMapController;
 
 public class MainActivity extends AppCompatActivity {
+
+    private GoogleMapController googleMapController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +20,23 @@ public class MainActivity extends AppCompatActivity {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
-        new GoogleMapController(this, mapFragment);
+        googleMapController = new GoogleMapController(this, mapFragment);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.map_refresh:
+                googleMapController.showSingaporeMap();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
