@@ -176,6 +176,10 @@ public class GoogleMapController implements OnMapReadyCallback {
         }
     }
 
+    public void updatePSIData() {
+        checkConnection();
+    }
+
     private void retrievePSIData() {
         psiModel.getPSI(new IDataCallback<PSIData>() {
             @Override
