@@ -1,35 +1,27 @@
 package com.songkhoon.singaporepsi.model;
 
+import com.songkhoon.singaporepsi.MainApplication;
 import com.songkhoon.singaporepsi.model.data.PSIData;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PSIModel {
 
-    private String psiURL = "https://api.data.gov.sg/v1/";
-    private final OkHttpClient okHttpClient;
-    private final Retrofit client;
+    @Inject
+    OkHttpClient okHttpClient;
+    @Inject
+    Retrofit client;
     private final IServiceEndpoint serviceEndpoint;
 
     public PSIModel() {
-        okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
-                .build();
-
-        client = new Retrofit.Builder()
-                .baseUrl(psiURL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
+        MainApplication.getApp().getApiComponent().inject(this);
         serviceEndpoint = client.create(IServiceEndpoint.class);
     }
 
