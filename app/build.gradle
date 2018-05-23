@@ -18,6 +18,10 @@ android {
     }
 }
 
+ext {
+    daggerVersion = '2.13'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -34,8 +38,14 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.0'
     implementation 'com.google.maps.android:android-maps-utils:0.5+'
 
-    // Dagger 2
-    implementation 'com.google.dagger:dagger:2.13'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
+    // Dagger core
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // Dagger Android
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    // if you are not using support library, include this instead
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
 
 }
