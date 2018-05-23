@@ -1,11 +1,8 @@
 package com.songkhoon.singaporepsi.model;
 
-import com.songkhoon.singaporepsi.MainApplication;
 import com.songkhoon.singaporepsi.model.data.PSIData;
 
 import java.io.IOException;
-
-import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -14,14 +11,14 @@ import retrofit2.Retrofit;
 
 public class PSIModel {
 
-    @Inject
-    OkHttpClient okHttpClient;
-    @Inject
-    Retrofit client;
+    private final OkHttpClient okHttpClient;
+    private final Retrofit client;
+
     private final IServiceEndpoint serviceEndpoint;
 
-    public PSIModel() {
-        MainApplication.getApp().getApiComponent().inject(this);
+    public PSIModel(OkHttpClient okHttpClient, Retrofit retrofit) {
+        this.okHttpClient = okHttpClient;
+        this.client = retrofit;
         serviceEndpoint = client.create(IServiceEndpoint.class);
     }
 

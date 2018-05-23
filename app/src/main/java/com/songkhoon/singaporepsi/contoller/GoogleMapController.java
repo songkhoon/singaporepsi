@@ -36,16 +36,18 @@ import java.util.List;
 
 public class GoogleMapController implements OnMapReadyCallback {
 
+    private final PSIModel psiModel;
+
     private final Context context;
     private final LatLng singapore = new LatLng(1.35735, 103.82);
     private GoogleMap googleMap;
     private ProgressDialog progressDialog;
-    final private PSIModel psiModel = new PSIModel();
     private PSIData psiData;
 
-    public GoogleMapController(final Context context, final SupportMapFragment mapFragment) {
+    public GoogleMapController(final Context context, final SupportMapFragment mapFragment, PSIModel psiModel) {
         this.context = context;
         mapFragment.getMapAsync(this);
+        this.psiModel = psiModel;
     }
 
     @Override

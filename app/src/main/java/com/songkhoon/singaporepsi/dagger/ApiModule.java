@@ -6,6 +6,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -17,11 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class ApiModule {
-    String mBaseUrl;
-
-    public ApiModule(String mBaseUrl) {
-        this.mBaseUrl = mBaseUrl;
-    }
 
     @Provides
     @Singleton
@@ -49,11 +45,12 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
+    Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient, @Named("baseURL") String baseUrl) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl(mBaseUrl)
+                .baseUrl(baseUrl)
                 .client(okHttpClient)
                 .build();
     }
+
 }

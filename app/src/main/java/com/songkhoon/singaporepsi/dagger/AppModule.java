@@ -1,23 +1,17 @@
 package com.songkhoon.singaporepsi.dagger;
 
-import android.app.Application;
-
-import javax.inject.Singleton;
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
 public class AppModule {
-    Application mApplication;
-
-    public AppModule(Application application) {
-        mApplication = application;
-    }
 
     @Provides
-    @Singleton
-    Application provideApplication() {
-        return mApplication;
+    @Named("baseURL")
+    static String provideBaseURL() {
+        return "https://api.data.gov.sg/v1/";
     }
+
 }

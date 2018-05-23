@@ -1,22 +1,29 @@
 package com.songkhoon.singaporepsi;
 
+import android.app.Activity;
 import android.app.Application;
 
-import com.songkhoon.singaporepsi.dagger.ApiComponent;
-import com.songkhoon.singaporepsi.dagger.ApiModule;
-import com.songkhoon.singaporepsi.dagger.AppModule;
-import com.songkhoon.singaporepsi.dagger.DaggerApiComponent;
+import com.songkhoon.singaporepsi.dagger.DaggerAppComponent;
 
-public class MainApplication extends Application {
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+
+public class MainApplication extends Application implements HasActivityInjector {
     private static MainApplication app;
-    private ApiComponent apiComponent;
 
     public static MainApplication getApp() {
         return app;
     }
 
-    public ApiComponent getApiComponent() {
-        return apiComponent;
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return dispatchingAndroidInjector;
     }
 
     @Override
@@ -28,9 +35,11 @@ public class MainApplication extends Application {
     }
 
     private void initComponent() {
-        apiComponent = DaggerApiComponent.builder()
-                .appModule(new AppModule(this))
-                .apiModule(new ApiModule("https://api.data.gov.sg/v1/"))
-                .build();
+        DaggerAppComponent
+                .builder()
+                .application(this)
+                .build()
+                .inject(this);
     }
+
 }
