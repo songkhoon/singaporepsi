@@ -3,7 +3,7 @@ package com.songkhoon.singaporepsi;
 import android.app.Activity;
 import android.app.Application;
 
-import com.songkhoon.singaporepsi.dagger.DaggerAppComponent;
+import com.songkhoon.singaporepsi.di.DaggerAppComponent;
 
 import javax.inject.Inject;
 

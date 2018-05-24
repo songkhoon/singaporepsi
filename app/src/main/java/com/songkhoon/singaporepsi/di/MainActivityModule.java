@@ -1,4 +1,4 @@
-package com.songkhoon.singaporepsi.dagger;
+package com.songkhoon.singaporepsi.di;
 
 import dagger.Module;
 
