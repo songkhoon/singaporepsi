@@ -1,8 +1,12 @@
-package com.songkhoon.singaporepsi.di;
+package com.songkhoon.singaporepsi.di.component;
 
 import android.app.Application;
 
 import com.songkhoon.singaporepsi.MainApplication;
+import com.songkhoon.singaporepsi.di.module.ActivityBindingModule;
+import com.songkhoon.singaporepsi.di.module.AppModule;
+import com.songkhoon.singaporepsi.di.module.NetworkModule;
+import com.songkhoon.singaporepsi.di.module.PSIModelModule;
 
 import javax.inject.Singleton;
 

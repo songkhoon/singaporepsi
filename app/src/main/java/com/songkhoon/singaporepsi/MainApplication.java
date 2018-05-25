@@ -3,7 +3,7 @@ package com.songkhoon.singaporepsi;
 import android.app.Activity;
 import android.app.Application;
 
-import com.songkhoon.singaporepsi.di.DaggerAppComponent;
+import com.songkhoon.singaporepsi.di.component.DaggerAppComponent;
 
 import javax.inject.Inject;
 
@@ -12,11 +12,6 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 
 public class MainApplication extends Application implements HasActivityInjector {
-    private static MainApplication app;
-
-    public static MainApplication getApp() {
-        return app;
-    }
 
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
@@ -29,7 +24,6 @@ public class MainApplication extends Application implements HasActivityInjector 
     @Override
     public void onCreate() {
         super.onCreate();
-        app = this;
 
         initComponent();
     }
